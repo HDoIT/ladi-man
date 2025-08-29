@@ -18341,7 +18341,7 @@
             // Reset animation
             popup.style.animation = "none";
             popup.offsetHeight; // trigger reflow
-            popup.style.animation = "fadeInOut 20s forwards";
+            popup.style.animation = "fadeInOut 5s forwards";
 
             // Tăng index để hiện khách hàng tiếp theo
             currentIndex = (currentIndex + 1) % customers.length;
@@ -18350,7 +18350,7 @@
         // Chạy lần đầu sau 2s, sau đó mỗi 10s
         setTimeout(() => {
             showPopup();
-            setInterval(showPopup, 23000);
+            setInterval(showPopup, 20000);
         }, 2000);
     </script>
 
