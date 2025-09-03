@@ -16742,42 +16742,43 @@
                             <div id="w-b8ktrbh7" class="p-absolute">
                                 <div class="radio-css full-height full-width">
                                     <label class="radio-item">
-                                        <input id="nir90q0c" type="radio" name="radio_input_1" class="radio-input"
-                                            value="0,8m x 1m9 x 0,95m - 179K" required>
+                                        <input id="nir90q0c" type="checkbox" name="radio_input_1" class="radio-input"
+                                            value="0,8m x 1m9 x 0,95m - 179K">
                                         <span class="radio-label">0,8m x 1m9 x 0,95m - 179K - Miễn phí ship</span>
                                     </label>
                                     <label class="radio-item">
-                                        <input id="byrcmquv" type="radio" name="radio_input_1" class="radio-input"
-                                            value="1m x 1m9 x 0,95m - 185K" required>
+                                        <input id="byrcmquv" type="checkbox" name="radio_input_1" class="radio-input"
+                                            value="1m x 1m9 x 0,95m - 185K">
                                         <span class="radio-label">1m x 1m9 x 0,95m - 185K - Miễn phí ship</span>
                                     </label>
                                     <label class="radio-item">
-                                        <input id="khlni131" type="radio" name="radio_input_1" class="radio-input"
-                                            value="1m2 x 1m9 x 0,95m - 195K" required>
+                                        <input id="khlni131" type="checkbox" name="radio_input_1" class="radio-input"
+                                            value="1m2 x 1m9 x 0,95m - 195K">
                                         <span class="radio-label">1m2 x 1m9 x 0,95m - 195K - Miễn phí ship</span>
                                     </label>
                                     <label class="radio-item">
-                                        <input id="7xusuz5v" type="radio" name="radio_input_1" class="radio-input"
-                                            value="1m4 x 1m9 x 0,95m - 200K" required>
+                                        <input id="7xusuz5v" type="checkbox" name="radio_input_1" class="radio-input"
+                                            value="1m4 x 1m9 x 0,95m - 200K">
                                         <span class="radio-label">1m4 x 1m9 x 0,95m - 200K - Miễn phí ship</span>
                                     </label>
                                     <label class="radio-item">
-                                        <input id="o6ug79mh" type="radio" name="radio_input_1" class="radio-input"
-                                            value="1m5 x 1m9 x 0,95m - 205K" required>
+                                        <input id="o6ug79mh" type="checkbox" name="radio_input_1" class="radio-input"
+                                            value="1m5 x 1m9 x 0,95m - 205K">
                                         <span class="radio-label">1m5 x 1m9 x 0,95m - 205K - Miễn phí ship</span>
                                     </label>
                                     <label class="radio-item">
-                                        <input id="ip5lq7aq" type="radio" name="radio_input_1" class="radio-input"
-                                            value="1m6 x 2m x 0,95m - 210K" required>
+                                        <input id="ip5lq7aq" type="checkbox" name="radio_input_1" class="radio-input"
+                                            value="1m6 x 2m x 0,95m - 210K">
                                         <span class="radio-label">1m6 x 2m x 0,95m - 210K - Miễn phí ship</span>
                                     </label>
                                     <label class="radio-item">
-                                        <input id="4xdgkfyz" type="radio" name="radio_input_1" class="radio-input"
-                                            value="1m8 x 2m x 0,95m - 220K" required>
+                                        <input id="4xdgkfyz" type="checkbox" name="radio_input_1" class="radio-input"
+                                            value="1m8 x 2m x 0,95m - 220K">
                                         <span class="radio-label">1m8 x 2m x 0,95m - 220K - Miễn phí ship</span>
                                     </label>
                                 </div>
                             </div>
+
                         </form>
                     </div>
                 </div>
@@ -17121,7 +17122,8 @@
                     </div>
                     <div id="w-j3rdbauu" class="com-text-block p-absolute">
                         <div class="text-block">
-                            <p class="text-block-css full-width">Trên cả mong đợi. Shop giao hàng nhanh. Gói hàng cẩn thận. Hàng y như mô tả, mua về phát có bạn hỏi để mua luôn.
+                            <p class="text-block-css full-width">Trên cả mong đợi. Shop giao hàng nhanh. Gói hàng cẩn
+                                thận. Hàng y như mô tả, mua về phát có bạn hỏi để mua luôn.
                             </p>
                         </div>
                     </div>
@@ -18729,22 +18731,43 @@
         const button = document.getElementById("w-det031ks");
 
         button.addEventListener("click", function () {
-            // Lấy dữ liệu form
             const formData = new FormData(form);
-            const data = Object.fromEntries(formData.entries());
 
-            // Gửi lên Google Apps Script
+            // Lấy tất cả checkbox có name="radio_input_1"
+            const selectedProducts = formData.getAll("radio_input_1");
+
+            // Convert formData -> object
+            const data = Object.fromEntries(formData.entries());
+            data.radio_input_1 = selectedProducts.join(", "); // gộp nhiều sp lại
+
             fetch(scriptURL, {
                 method: "POST",
                 mode: "no-cors",
                 body: JSON.stringify(data),
                 headers: { "Content-Type": "application/json" }
-            })
+            });
 
             alert("Đặt hàng thành công!");
-            form.reset(); // reset form sau khi gửi
-
+            form.reset();
         });
+
+        // button.addEventListener("click", function () {
+        //     // Lấy dữ liệu form
+        //     const formData = new FormData(form);
+        //     const data = Object.fromEntries(formData.entries());
+
+        //     // Gửi lên Google Apps Script
+        //     fetch(scriptURL, {
+        //         method: "POST",
+        //         mode: "no-cors",
+        //         body: JSON.stringify(data),
+        //         headers: { "Content-Type": "application/json" }
+        //     })
+
+        //     alert("Đặt hàng thành công!");
+        //     form.reset(); // reset form sau khi gửi
+
+        // });
     </script>
     <script>
         // Hàm tạo countdown
